@@ -14,27 +14,35 @@ function App() {
   }
 
   const handleToggleTask = (taskId: string) => {
-    setTasks((prev) => prev.map((task: Task) => {
-      if (taskId === task.id) {
-        return { ...task, done: !task.done }
-      }
+    setTasks((prev) =>
+      prev.map((task: Task) => {
+        if (taskId === task.id) {
+          return { ...task, done: !task.done }
+        }
 
-      return task
-    }))
+        return task
+      })
+    )
   }
 
   const handleRemoveTask = (taskId: string) => {
-    setTasks((prev) => prev.filter((task: Task) => {
-      return taskId !== task.id
-    }))
+    setTasks((prev) =>
+      prev.filter((task: Task) => {
+        return taskId !== task.id
+      })
+    )
   }
 
   return (
     <div className="d-flex justify-content-center container">
       <div className="col-md-8">
         <div className="card-hover-shadow-2x mb-3 card">
-          <TasksHeader addTask={ handleAddTask } />
-          <TasksBody tasks={ tasks } toggleTask={ handleToggleTask } removeTask={handleRemoveTask} />
+          <TasksHeader addTask={handleAddTask} />
+          <TasksBody
+            tasks={tasks}
+            toggleTask={handleToggleTask}
+            removeTask={handleRemoveTask}
+          />
           <TasksFooter />
         </div>
       </div>
