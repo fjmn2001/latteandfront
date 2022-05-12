@@ -3,16 +3,18 @@ import { Task } from "../types"
 
 interface Props {
   tasks: Array<Task>
+  toggleTask: (taskId: string) => void
+  removeTask: (taskId: string) => void
 }
 
-const TasksBody = ({ tasks }: Props) => {
+const TasksBody = ({ tasks, toggleTask, removeTask }: Props) => {
 
   return (
     <div className="scroll-area-sm">
       <div style={ { position: "static" } } className="ps ps--active-y">
         <div className="ps-content">
           <ul className=" list-group list-group-flush">
-            { tasks.map(task => (<TaskItem task={ task } key={ task.id } />)) }
+            { tasks.map(task => (<TaskItem task={ task } key={ task.id } toggleTask={ toggleTask } removeTask={removeTask} />)) }
             { tasks.length === 0 && <li className="list-group-item">
               <div className="widget-content p-0">
                 <div className="widget-content-wrapper">
