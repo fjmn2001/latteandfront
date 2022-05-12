@@ -15,8 +15,8 @@ jobs:
           node-version: 16
       - name: install
         run: |
-        npm install
-        npm install --workspace=apps/tasks/frontend
+          npm install
+          npm install --workspace=apps/tasks/frontend
 
       - name: lint
         run: npm run lint-tasks-frontend
