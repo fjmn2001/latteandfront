@@ -5,7 +5,10 @@
     ],
     "scripts": {
         "dev-tasks-frontend": "npm run dev --workspace=apps/tasks/frontend",
-        "build-tasks-frontend": "npm run build --workspace=apps/tasks/frontend"
+        "build-tasks-frontend": "npm run build --workspace=apps/tasks/frontend",
+        "lint-tasks-frontend": "npm run lint --workspace=apps/tasks/frontend",
+        "test-tasks-frontend": "npm run test --workspace=apps/tasks/frontend",
+        "coverage-tasks-frontend": "npm run coverage --workspace=apps/tasks/frontend"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.23.0",
