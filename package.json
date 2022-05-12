@@ -3,6 +3,10 @@
     "workspaces": [
         "apps/tasks/frontend"
     ],
+    "scripts": {
+        "dev-tasks-frontend": "npm run dev --workspace=apps/tasks/frontend",
+        "build-tasks-frontend": "npm run build --workspace=apps/tasks/frontend"
+    },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.23.0",
         "@typescript-eslint/parser": "^5.23.0",
