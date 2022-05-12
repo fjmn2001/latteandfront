@@ -1,0 +1,26 @@
+name: CI
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: install
+        run: npm install --workspace=apps/tasks/frontend
+
+      - name: lint
+        run: npm run lint-tasks-frontend
+
+      - name: build
+        run: npm run build-tasks-frontend
+
+      - name: test
+        run: npm run test-tasks-frontend
