@@ -33,4 +33,4 @@ You will also see any lint errors in the console.
 
 ### 🔗 Link to production
 
-[https://github.com/fjmn2001/latteandfront/deployments/activity_log?environment=Production](https://github.com/fjmn2001/latteandfront/deployments/activity_log?environment=Production)
+[https://latteandfront-tasks.vercel.app](https://latteandfront-tasks.vercel.app)
