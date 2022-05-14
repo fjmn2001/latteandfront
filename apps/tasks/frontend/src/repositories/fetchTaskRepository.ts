@@ -11,7 +11,12 @@ export const createTask = (task: Task): Promise<Task> => {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-  }).then((response) => response.json())
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("not ok")
+    }
+    return response.json()
+  })
 }
 
 export const updateTask = (task: Task): Promise<Task> => {
@@ -28,7 +33,12 @@ export const updateTask = (task: Task): Promise<Task> => {
         "Content-type": "application/json; charset=UTF-8",
       },
     }
-  ).then((response) => response.json())
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error("not ok")
+    }
+    return response.json()
+  })
 }
 
 export const getAllTasks = (): Promise<Array<Task>> => {
@@ -36,7 +46,12 @@ export const getAllTasks = (): Promise<Array<Task>> => {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-  }).then((response) => response.json())
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("not ok")
+    }
+    return response.json()
+  })
 }
 
 export const deleteTask = (taskId: string): Promise<null> => {
@@ -48,5 +63,10 @@ export const deleteTask = (taskId: string): Promise<null> => {
         "Content-type": "application/json; charset=UTF-8",
       },
     }
-  ).then((response) => response.json())
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error("not ok")
+    }
+    return response.json()
+  })
 }

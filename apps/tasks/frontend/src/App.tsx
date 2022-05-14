@@ -20,6 +20,7 @@ function App() {
   useEffect(function () {
     getAllTasks().then((tasks) => {
       setTasks(tasks)
+      setHistory((prev) => [...prev, tasks])
       setIsLoading(false)
     })
   }, [])
@@ -28,21 +29,19 @@ function App() {
     try {
       const localId = task.id
       setTasks((prev) => [task, ...prev])
-      createTask(task).then((newTask) => {
-        // thor mode 🤦 => only the server know the new id
-        setTasks((prev) =>
-          prev.map((task: Task) => {
-            if (localId === task.id) {
-              return { ...task, id: newTask.id }
-            }
+      const newTask = await createTask(task)
+      // thor mode 🤦 => only the server know the new id
+      setTasks((prev) =>
+        prev.map((task: Task) => {
+          if (localId === task.id) {
+            return { ...task, id: newTask.id }
+          }
 
-            return task
-          })
-        )
-        setHistory((prev) => [...prev, tasks])
-      })
+          return task
+        })
+      )
+      setHistory((prev) => [...prev, tasks])
     } catch (e) {
-      console.error(e)
       undo()
     }
   }
