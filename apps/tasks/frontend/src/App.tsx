@@ -25,7 +25,20 @@ function App() {
 
   const handleAddTask = async (task: Task) => {
     try {
-      await createTask(task)
+      const localId = task.id
+      setTasks((prev) => [task, ...prev])
+      createTask(task).then((newTask) => {
+        // thor mode 🤦 => only the server know the new id
+        setTasks((prev) =>
+          prev.map((task: Task) => {
+            if (localId === task.id) {
+              return { ...task, id: newTask.id }
+            }
+
+            return task
+          })
+        )
+      })
     } catch (e) {
       console.log(e, "handleAddTask")
     }
@@ -33,6 +46,16 @@ function App() {
 
   const handleToggleTask = async (task: Task) => {
     try {
+      const taskId = task.id
+      setTasks((prev) =>
+        prev.map((task: Task) => {
+          if (taskId === task.id) {
+            return { ...task, completed: !task.completed }
+          }
+
+          return task
+        })
+      )
       await updateTask(task)
     } catch (e) {
       console.log(e, "handleToggleTask")
@@ -41,6 +64,11 @@ function App() {
 
   const handleRemoveTask = async (taskId: string) => {
     try {
+      setTasks((prev) =>
+        prev.filter((task: Task) => {
+          return taskId !== task.id
+        })
+      )
       await deleteTask(taskId)
     } catch (e) {
       console.log(e, "handleRemoveTask")
