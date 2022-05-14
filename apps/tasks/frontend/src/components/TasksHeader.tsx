@@ -17,8 +17,8 @@ const TasksHeader = ({ addTask }: Props) => {
     e.preventDefault()
     addTask({
       id: uuid(),
-      done: false,
-      description,
+      completed: false,
+      task: description,
     })
     setDescription("")
   }
