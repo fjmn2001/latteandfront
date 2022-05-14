@@ -14,6 +14,7 @@ import {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [history, setHistory] = useState<Array<Array<Task>>>([])
   const [tasks, setTasks] = useState<Array<Task>>([])
 
   useEffect(function () {
@@ -38,9 +39,11 @@ function App() {
             return task
           })
         )
+        setHistory((prev) => [...prev, tasks])
       })
     } catch (e) {
-      console.log(e, "handleAddTask")
+      console.error(e)
+      undo()
     }
   }
 
@@ -56,9 +59,11 @@ function App() {
           return task
         })
       )
+      setHistory((prev) => [...prev, tasks])
       await updateTask(task)
     } catch (e) {
-      console.log(e, "handleToggleTask")
+      console.error(e)
+      undo()
     }
   }
 
@@ -69,10 +74,19 @@ function App() {
           return taskId !== task.id
         })
       )
+      setHistory((prev) => [...prev, tasks])
       await deleteTask(taskId)
     } catch (e) {
-      console.log(e, "handleRemoveTask")
+      console.error(e)
+      undo()
     }
+  }
+
+  const undo = () => {
+    const lastTasks = history[history.length - 1]
+    const newHistory = history.slice(0, history.length - 1)
+    setTasks(lastTasks)
+    setHistory(newHistory)
   }
 
   if (isLoading) {
