@@ -3,7 +3,7 @@ import { Task } from "../types"
 
 interface Props {
   tasks: Array<Task>
-  toggleTask: (taskId: string) => void
+  toggleTask: (task: Task) => void
   removeTask: (taskId: string) => void
 }
 

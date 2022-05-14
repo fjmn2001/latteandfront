@@ -3,34 +3,97 @@ import "./App.css"
 import TasksFooter from "./components/TasksFooter"
 import TasksHeader from "./components/TasksHeader"
 import TasksBody from "./components/TasksBody"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Task } from "./types"
 
+
+
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [tasks, setTasks] = useState<Array<Task>>([])
 
-  const handleAddTask = (task: Task) => {
-    setTasks((prev) => [task, ...prev])
+  useEffect(function() {
+    async function fetchTasks() {
+      const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo');
+      const json = await response.json();
+      setTasks(json);
+      setIsLoading(false);
+    }
+    fetchTasks();
+  }, []);
+
+  const handleAddTask = async (task: Task) => {
+    const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo', {
+      method: 'POST',
+      body: JSON.stringify({
+        task: task.task,
+        completed: false,
+        important: false
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if (response.ok) {
+      async function fetchTasks() {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo');
+        const json = await response.json();
+        setTasks(json);
+        setIsLoading(false);
+      }
+      fetchTasks();
+    } else {
+      const text = await response.text()
+      console.log(text);
+    }
   }
 
-  const handleToggleTask = (taskId: string) => {
-    setTasks((prev) =>
-      prev.map((task: Task) => {
-        if (taskId === task.id) {
-          return { ...task, done: !task.done }
-        }
-
-        return task
-      })
-    )
+  const handleToggleTask = async (task: Task) => {
+    const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo/${task.id}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        task: task.task,
+        completed: !task.completed,
+        important: true
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if (response.ok) {
+      async function fetchTasks() {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo');
+        const json = await response.json();
+        setTasks(json);
+        setIsLoading(false);
+      }
+      fetchTasks();
+    } else {
+      const text = await response.text()
+      console.log(text);
+    }
   }
 
-  const handleRemoveTask = (taskId: string) => {
-    setTasks((prev) =>
-      prev.filter((task: Task) => {
-        return taskId !== task.id
-      })
-    )
+  const handleRemoveTask = async (taskId: string) => {
+    const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo/${taskId}`, {
+      method: 'DELETE'
+    });
+    if (response.ok) {
+      async function fetchTasks() {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:FpUXJg0g/todo');
+        const json = await response.json();
+        setTasks(json);
+        setIsLoading(false);
+      }
+      fetchTasks();
+    } else {
+      const text = await response.text()
+      console.log(text);
+    }
+  }
+
+  if (isLoading) {
+    return <div>Cargando lista de tareas...</div>
   }
 
   return (

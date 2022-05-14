@@ -3,14 +3,14 @@ import React from "react"
 
 interface Props {
   task: Task
-  toggleTask: (taskId: string) => void
+  toggleTask: (task: Task) => void
   removeTask: (taskId: string) => void
 }
 
 const TaskItem = ({ task, toggleTask, removeTask }: Props) => {
   const handleToggle = (e: React.MouseEvent) => {
     e.preventDefault()
-    toggleTask(task.id)
+    toggleTask(task)
   }
 
   const handleRemove = (e: React.MouseEvent) => {
@@ -24,12 +24,12 @@ const TaskItem = ({ task, toggleTask, removeTask }: Props) => {
         <div className="widget-content-wrapper">
           <div
             className="widget-content-left"
-            style={task.done ? { textDecoration: "line-through" } : {}}
+            style={task.completed ? { textDecoration: "line-through" } : {}}
           >
-            <div className="widget-heading">{task.description}</div>
+            <div className="widget-heading">{task.task}</div>
           </div>
           <div className="widget-content-right">
-            {!task.done && (
+            {!task.completed && (
               <button
                 className="border-0 btn-transition btn btn-outline-success"
                 onClick={handleToggle}
@@ -38,7 +38,7 @@ const TaskItem = ({ task, toggleTask, removeTask }: Props) => {
               </button>
             )}
 
-            {task.done && (
+            {task.completed && (
               <button
                 className="border-0 btn-transition btn btn-outline-danger"
                 onClick={handleToggle}
