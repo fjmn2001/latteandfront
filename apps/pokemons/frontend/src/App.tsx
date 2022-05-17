@@ -1,37 +1,32 @@
 import "./App.css"
-
-import TasksFooter from "./components/TasksFooter"
-import TasksHeader from "./components/TasksHeader"
-import TasksBody from "./components/TasksBody"
-import useTasks from "./hooks/useTasks"
+import { useEffect, useState } from "react"
+import { PokemonItem } from "./types"
+import PokemonList from "./components/list/PokemonList"
+import PokemonCard from "./components/card/PokemonCard"
+import { getAllPokemon } from "./repositories/pokemonRepository"
 
 function App() {
-  const {
-    isLoading,
-    tasks,
-    handleAddTask,
-    handleToggleTask,
-    handleRemoveTask,
-  } = useTasks()
+  const [pokemon, setPokemon] = useState<Array<PokemonItem>>([])
 
-  if (isLoading) {
-    return <div>Cargando lista de tareas...</div>
-  }
+  useEffect(() => {
+    ;(async () => {
+      const { results } = await getAllPokemon()
+      setPokemon(results)
+    })()
+  }, [])
 
   return (
-    <div className="d-flex justify-content-center container">
-      <div className="col-md-8">
-        <div className="card-hover-shadow-2x mb-3 card">
-          <TasksHeader addTask={handleAddTask} />
-          <TasksBody
-            tasks={tasks}
-            toggleTask={handleToggleTask}
-            removeTask={handleRemoveTask}
-          />
-          <TasksFooter />
+    <main>
+      <h1>Panel de pokemon</h1>
+      <div className="row">
+        <div className="col">
+          <PokemonList pokemon={pokemon} />
+        </div>
+        <div className="col">
+          <PokemonCard />
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

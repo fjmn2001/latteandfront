@@ -1,5 +1,4 @@
-export interface Task {
-  id: string
-  completed: boolean
-  task: string
+export interface PokemonItem {
+  name: string
+  url: string
 }
