@@ -1,0 +1,9 @@
+// Vitest Snapshot v1
+
+exports[`Testing App.tsx > it should show correctly 1`] = `
+<div>
+  <div>
+    Cargando lista de tareas...
+  </div>
+</div>
+`;
