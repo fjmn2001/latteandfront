@@ -2,7 +2,6 @@ import "./App.css"
 import { useEffect, useState } from "react"
 import { PokemonItem } from "./types"
 import PokemonList from "./components/list/PokemonList"
-import PokemonCard from "./components/card/PokemonCard"
 import { getAllPokemon } from "./repositories/pokemonRepository"
 
 function App() {
@@ -21,9 +20,6 @@ function App() {
       <div className="row">
         <div className="col">
           <PokemonList pokemon={pokemon} />
-        </div>
-        <div className="col">
-          <PokemonCard />
         </div>
       </div>
     </main>
