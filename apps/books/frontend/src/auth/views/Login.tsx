@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from "react"
 import { JWT_KEY } from "../../shared/const/app"
 import LoginView from "./LoginView"
+import apiClient from "../../shared/utils/apiClient"
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -29,19 +30,10 @@ const Login = () => {
         hasFailed: false,
         hasSucceeded: false,
       })
-      const response = await fetch(
-        "https://librarify.latteandfront.es/api/login_check",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: form.email,
-            password: form.password,
-          }),
-        }
-      )
+      const response = await apiClient.post("login_check", {
+        username: form.email,
+        password: form.password,
+      })
       if (response.ok) {
         setRequestStatus({
           isLoading: false,
