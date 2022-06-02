@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from "react"
 import { JWT_KEY } from "../../shared/const/app"
+import LoginView from "./LoginView"
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -66,57 +67,12 @@ const Login = () => {
   }
 
   return (
-    <div className="row">
-      <div className="col">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-floating mb-3">
-            <input
-              type="email"
-              className="form-control"
-              id="floatingEmail"
-              placeholder="name@example.com"
-              required={true}
-              name={"email"}
-              value={form.email}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="floatingEmail">Email address</label>
-          </div>
-          <div className="form-floating">
-            <input
-              type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password"
-              required={true}
-              name={"password"}
-              value={form.password}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="floatingPassword">Password</label>
-          </div>
-          {requestStatus.isLoading && (
-            <div className="alert alert-info mt-3" role="alert">
-              Loading...
-            </div>
-          )}
-          {requestStatus.hasFailed && (
-            <div className="alert alert-danger mt-3" role="alert">
-              Invalid credentials
-            </div>
-          )}
-          {requestStatus.hasSucceeded && (
-            <div className="alert alert-success mt-3" role="alert">
-              Welcome!
-            </div>
-          )}
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
+    <LoginView
+      handleSubmit={handleSubmit}
+      form={form}
+      handleInputChange={handleInputChange}
+      requestStatus={requestStatus}
+    />
   )
 }
 
