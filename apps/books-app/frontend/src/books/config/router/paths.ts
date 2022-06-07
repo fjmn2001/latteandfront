@@ -1,0 +1,5 @@
+export const BOOKS = "/user/books"
+export const BOOK_ADD = "/user/add-book"
+export const BOOK_DETAIL = "/user/books/:id"
+export const BOOK_DELETE = "/user/books/:id/delete"
+export const BOOK_EDIT = "/user/books/:id/edit"
