@@ -1,13 +1,21 @@
 import apiClient from "../utils/apiClient"
 import { useEffect, useState } from "react"
+import { useAuthContext } from "../../auth/contexts/authContext"
 
-const useGetFetch = async <T>(path: string) => {
+interface RequestStatus {
+  isLoading: boolean
+  hasFailed: boolean
+  hasSucceeded: boolean
+}
+
+const useGetFetch = <T>(path: string): [RequestStatus, T | null] => {
   const [requestStatus, setRequestStatus] = useState({
     isLoading: false,
     hasFailed: false,
     hasSucceeded: false,
   })
   const [json, setJson] = useState<T | null>(null)
+  const { authTokens } = useAuthContext()
 
   useEffect(() => {
     ;(async () => {
@@ -17,22 +25,17 @@ const useGetFetch = async <T>(path: string) => {
           hasFailed: false,
           hasSucceeded: false,
         })
-        const response = await apiClient.get(path)
-        if (response.ok) {
-          setRequestStatus({
-            isLoading: false,
-            hasFailed: false,
-            hasSucceeded: true,
-          })
-          const json = await response.json()
-          setJson(json)
-        } else {
-          setRequestStatus({
-            isLoading: false,
-            hasFailed: true,
-            hasSucceeded: false,
-          })
-        }
+        const json = await apiClient.get(path, {
+          Authorization: `Bearer ${authTokens.token}`,
+        })
+
+        setRequestStatus({
+          isLoading: false,
+          hasFailed: false,
+          hasSucceeded: true,
+        })
+
+        setJson(json)
       } catch (e) {
         setRequestStatus({
           isLoading: false,
@@ -41,7 +44,7 @@ const useGetFetch = async <T>(path: string) => {
         })
       }
     })()
-  }, [])
+  }, [path])
 
   return [requestStatus, json]
 }
