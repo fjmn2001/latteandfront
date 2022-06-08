@@ -21,7 +21,7 @@ const BookItem = (book: Props) => {
             <div className={"card-body"}>
               <h5 className={"card-title"}>{book.title}</h5>
               <p className={"card-text"}>{book.description}</p>
-              <Link to={`books/${book.id}`}>More...</Link>
+              <Link to={`/user/books/${book.id}`}>More...</Link>
             </div>
           </div>
         </div>
