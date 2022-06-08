@@ -2,10 +2,10 @@ import { Navigate, Outlet } from "react-router-dom"
 import { useAuthContext } from "../../../auth/contexts/authContext"
 
 const PublicRoute = () => {
-  const { isAuthenticated } = useAuthContext()
+  const { isLoggedIn } = useAuthContext()
 
-  if (isAuthenticated) {
-    return <Navigate to={"/private"} />
+  if (isLoggedIn) {
+    return <Navigate to={"/user/books"} />
   }
 
   return (

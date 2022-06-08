@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react"
-import { JWT_KEY } from "../../shared/const/app"
 import LoginView from "./LoginView"
 import apiClient from "../../shared/utils/apiClient"
+import { useAuthContext } from "../contexts/authContext"
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -13,6 +13,7 @@ const Login = () => {
     hasFailed: false,
     hasSucceeded: false,
   })
+  const { login } = useAuthContext()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((currentForm) => ({
@@ -30,25 +31,16 @@ const Login = () => {
         hasFailed: false,
         hasSucceeded: false,
       })
-      const response = await apiClient.post("login_check", {
+      const json = await apiClient.post("login_check", {
         username: form.email,
         password: form.password,
       })
-      if (response.ok) {
-        setRequestStatus({
-          isLoading: false,
-          hasFailed: false,
-          hasSucceeded: true,
-        })
-        const json = await response.json()
-        localStorage.setItem(JWT_KEY, JSON.stringify(json.data))
-      } else {
-        setRequestStatus({
-          isLoading: false,
-          hasFailed: true,
-          hasSucceeded: false,
-        })
-      }
+      setRequestStatus({
+        isLoading: false,
+        hasFailed: false,
+        hasSucceeded: true,
+      })
+      login(json.data)
     } catch (e) {
       setRequestStatus({
         isLoading: false,

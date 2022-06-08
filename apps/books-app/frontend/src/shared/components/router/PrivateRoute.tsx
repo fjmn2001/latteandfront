@@ -3,9 +3,9 @@ import { useAuthContext } from "../../../auth/contexts/authContext"
 import { LOGIN } from "../../../auth/config/routes/paths"
 
 const PrivateRoute = () => {
-  const { isAuthenticated } = useAuthContext()
+  const { isLoggedIn } = useAuthContext()
 
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return <Navigate to={LOGIN} />
   }
 

@@ -6,12 +6,20 @@ import React, {
   useState,
 } from "react"
 
+interface AuthTokens {
+  token: string
+  refresh_token: string
+}
+
 const MY_AUTH_APP = "MY_AUTH_APP"
 
 export const AuthContext = createContext({
-  login: () => {},
+  login: (authTokens: AuthTokens) => {
+    console.log(authTokens)
+  },
   logout: () => {},
-  isAuthenticated: false,
+  authTokens: { token: "", refresh_token: "" },
+  isLoggedIn: false,
 })
 
 export const AuthContextProvider = ({
@@ -19,27 +27,31 @@ export const AuthContextProvider = ({
 }: {
   children: React.ReactElement
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    window.localStorage.getItem(MY_AUTH_APP) === "true"
+  const authTokensInLocalStorage = window.localStorage.getItem(MY_AUTH_APP)
+  const [authTokens, setAuthTokens] = useState(
+    authTokensInLocalStorage === null
+      ? null
+      : JSON.parse(authTokensInLocalStorage)
   )
 
-  const login = useCallback(() => {
-    window.localStorage.setItem(MY_AUTH_APP, String(true))
-    setIsAuthenticated(true)
+  const login = useCallback((authTokens: AuthTokens) => {
+    window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(authTokens))
+    setAuthTokens(authTokens)
   }, [])
 
   const logout = useCallback(() => {
     window.localStorage.removeItem(MY_AUTH_APP)
-    setIsAuthenticated(false)
+    setAuthTokens(null)
   }, [])
 
   const value = useMemo(
     () => ({
       login,
       logout,
-      isAuthenticated,
+      authTokens,
+      isLoggedIn: authTokens !== null,
     }),
-    [login, logout, isAuthenticated]
+    [authTokens, login, logout]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
