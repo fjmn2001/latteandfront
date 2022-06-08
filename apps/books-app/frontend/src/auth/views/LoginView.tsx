@@ -18,7 +18,7 @@ const LoginView = ({
   requestStatus,
 }: Props) => {
   return (
-    <div className="row">
+    <div className="container">
       <div className="col">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
