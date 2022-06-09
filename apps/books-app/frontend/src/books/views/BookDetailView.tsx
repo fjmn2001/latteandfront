@@ -9,7 +9,7 @@ const BookDetailView = () => {
   const [, book] = useGetFetch<BookResponse>(`books/${id}`)
 
   if (book === null) {
-    return "loading..."
+    return <h1>loading...</h1>
   }
 
   const imagePath = book.image ?? "https://libro.latteandfront.es/img/logo.png"
