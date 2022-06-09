@@ -1,4 +1,5 @@
 import useGetFetch from "../../shared/hooks/useGetFetch"
+import Alert from "../../shared/components/ui/Alert"
 
 type CategoriesResponse = Array<string>
 
@@ -6,7 +7,7 @@ const Categories = () => {
   const [, categories] = useGetFetch<CategoriesResponse>("categories")
 
   if (categories === null) {
-    return "loading..."
+    return <Alert type={"info"}>loading...</Alert>
   }
 
   return (

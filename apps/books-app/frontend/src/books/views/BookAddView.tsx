@@ -1,6 +1,7 @@
 import useForm from "../../shared/hooks/useForm"
 import usePostFetch from "../../shared/hooks/usePostFetch"
 import React, { FormEvent } from "react"
+import { Navigate } from "react-router-dom"
 
 export interface Book {
   id: string
@@ -17,8 +18,19 @@ const BookAddView = () => {
   const [status, , handleRequest] = usePostFetch("books")
   const { title, description } = formValues
 
+  if (status.hasSucceeded) {
+    return (
+      <Navigate to={"/user/books"} state={{ hasSucceeded: true }}></Navigate>
+    )
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
+    if (title.trim().length === 0) {
+      throw new Error("Title is required.")
+    }
+
     handleRequest({
       title,
     })
@@ -55,6 +67,7 @@ const BookAddView = () => {
             <button
               type={"submit"}
               className={"btn btn-outline-primary mt-1 w-100"}
+              disabled={status.isLoading}
             >
               Add
             </button>
