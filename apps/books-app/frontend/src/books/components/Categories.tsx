@@ -1,7 +1,10 @@
 import useGetFetch from "../../shared/hooks/useGetFetch"
 import Alert from "../../shared/components/ui/Alert"
 
-type CategoriesResponse = Array<string>
+type CategoriesResponse = Array<{
+  id: string
+  name: string
+}>
 
 const Categories = () => {
   const [, categories] = useGetFetch<CategoriesResponse>("categories")
@@ -16,8 +19,8 @@ const Categories = () => {
       <select className="form-select">
         <option value="">All</option>
         {categories.map((category) => (
-          <option key={category} value={category}>
-            {category}
+          <option key={category.id} value={category.name}>
+            {category.name}
           </option>
         ))}
       </select>

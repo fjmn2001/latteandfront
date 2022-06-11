@@ -1,7 +1,8 @@
 import useForm from "../../shared/hooks/useForm"
 import usePostFetch from "../../shared/hooks/usePostFetch"
-import React, { FormEvent } from "react"
+import React, { FormEvent, useState } from "react"
 import { Navigate } from "react-router-dom"
+import base64String from "../../shared/utils/base64String"
 
 export interface Book {
   id: string
@@ -15,6 +16,8 @@ const BookAddView = () => {
     title: "",
     description: "",
   })
+  const [file, setFile] = useState<string | null>(null)
+  const [base64Image, setBase64Image] = useState<string | null>(null)
   const [status, , handleRequest] = usePostFetch("books")
   const { title, description } = formValues
 
@@ -33,8 +36,16 @@ const BookAddView = () => {
 
     handleRequest({
       title,
+      base64Image,
     })
-    console.log("handleSubmit", status)
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return
+    }
+    setFile(URL.createObjectURL(e.target.files[0]))
+    setBase64Image(await base64String(e.target.files[0]))
   }
 
   return (
@@ -46,31 +57,45 @@ const BookAddView = () => {
           <h4>Add book</h4>
           <hr />
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder={"Title"}
-              className={"form-control"}
-              name={"title"}
-              autoComplete={"off"}
-              onChange={handleInputChange}
-              value={title}
-            />
-            <input
-              type="text"
-              placeholder={"Description"}
-              className={"form-control mt-1"}
-              name={"description"}
-              autoComplete={"off"}
-              onChange={handleInputChange}
-              value={description ?? ""}
-            />
-            <button
-              type={"submit"}
-              className={"btn btn-outline-primary mt-1 w-100"}
-              disabled={status.isLoading}
-            >
-              Add
-            </button>
+            <div className={"row"}>
+              <div className={"col-6"}>
+                <input
+                  type="text"
+                  placeholder={"Title"}
+                  className={"form-control"}
+                  name={"title"}
+                  autoComplete={"off"}
+                  onChange={handleInputChange}
+                  value={title}
+                />
+                <input
+                  type="text"
+                  placeholder={"Description"}
+                  className={"form-control mt-1"}
+                  name={"description"}
+                  autoComplete={"off"}
+                  onChange={handleInputChange}
+                  value={description ?? ""}
+                />
+                <button
+                  type={"submit"}
+                  className={"btn btn-outline-primary mt-1 w-100"}
+                  disabled={status.isLoading}
+                >
+                  Add
+                </button>
+              </div>
+              <div className={"col-6"}>
+                <input type="file" onChange={handleFileChange} />
+                <img
+                  className={"img-fluid " + (!file ? "visually-hidden" : "")}
+                  style={{ maxHeight: "480px" }}
+                  src={file ?? ""}
+                  alt={"portrait"}
+                  id={"portrait"}
+                />
+              </div>
+            </div>
           </form>
         </div>
       </div>
