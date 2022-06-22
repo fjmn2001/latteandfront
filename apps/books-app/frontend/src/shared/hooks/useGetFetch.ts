@@ -10,7 +10,7 @@ interface RequestStatus {
 
 const useGetFetch = <T>(path: string): [RequestStatus, T | null] => {
   const [requestStatus, setRequestStatus] = useState({
-    isLoading: false,
+    isLoading: true,
     hasFailed: false,
     hasSucceeded: false,
   })

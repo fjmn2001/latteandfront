@@ -1,3 +1,5 @@
+import "./app.css"
+
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { LOGIN, LOGOUT } from "./auth/config/routes/paths"
 import Login from "./auth/views/Login"

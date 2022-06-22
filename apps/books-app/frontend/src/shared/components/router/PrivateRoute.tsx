@@ -13,9 +13,9 @@ const PrivateRoute = () => {
   return (
     <>
       <Navbar />
-      <div className={"container"}>
+      <main className={"main"}>
         <Outlet />
-      </div>
+      </main>
     </>
   )
 }

@@ -3,6 +3,8 @@ import usePostFetch from "../../shared/hooks/usePostFetch"
 import React, { FormEvent, useState } from "react"
 import { Navigate } from "react-router-dom"
 import base64String from "../../shared/utils/base64String"
+import useGetFetch from "../../shared/hooks/useGetFetch"
+import { CategoriesResponse } from "../components/Categories"
 
 export interface Book {
   id: string
@@ -11,6 +13,7 @@ export interface Book {
 }
 
 const BookAddView = () => {
+  const [, categories] = useGetFetch<CategoriesResponse>("categories")
   const [formValues, handleInputChange] = useForm<Book>({
     id: "",
     title: "",
@@ -77,6 +80,34 @@ const BookAddView = () => {
                   onChange={handleInputChange}
                   value={description ?? ""}
                 />
+                <div className="input-group mt-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Recipient's username"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    id="button-addon2"
+                  >
+                    Add Category
+                  </button>
+                </div>
+                <select
+                  className={"form-control mt-1"}
+                  name="categories"
+                  multiple={true}
+                >
+                  {categories &&
+                    categories.map((category) => (
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                </select>
                 <button
                   type={"submit"}
                   className={"btn btn-outline-primary mt-1 w-100"}

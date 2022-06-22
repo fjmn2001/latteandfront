@@ -1,0 +1,303 @@
+:root {
+  --white: white;
+  --gray1: #373737;
+  --gray2: #617281;
+}
+
+*{
+  font-family: sans-serif;
+  margin: 0;
+  color: #566474;
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  background: #e6e9ed;
+}
+
+#navbarNavDropdown{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar{
+  background: #566474 !important;
+}
+
+.nav-item{
+  margin-left: 30px;
+}
+
+.navbar > div.container-fluid{
+  padding-inline: 66px;
+}
+
+
+
+.navbar a.nav-link.active {
+  font-weight: bold;
+  color: var(--white) !important;
+}
+
+.navbar ul.dropdown-menu.show {
+  margin-left: -28px;
+  margin-top: 15px;
+  border-radius: unset;
+}
+
+.navbar .nav-link{
+  color: var(--white);
+}
+
+.main{
+  padding-inline: 6rem;
+  padding-block: 1.5rem;
+}
+
+.div-title{
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.div-shadow{
+  width: 100%;
+  background: var(--white);
+  box-shadow: 0.906205px 1.81241px 13px -2px rgba(0, 0, 0, 0.1);
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  font-size: 2rem;
+  font-weight: lighter;
+  margin: 0;
+  color: var(--gray1)
+}
+
+.form-control{
+  border-radius: unset;
+}
+
+.btn{
+  border-radius: unset;
+}
+
+.seach-group{
+  width: 300px;
+  margin: 0;
+}
+
+.seach{
+  width: 300px;
+  border-right: unset;
+}
+.seach:focus ~ .btn-seach{
+  border-color: #86b7fe;
+}
+
+.btn-seach{
+  border-left: unset;
+  border-color: #ced4da;
+}
+
+.btn-seach:hover, .btn-seach:active {
+  background: #f6f6f6;
+  border-color: #ced4da;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.div-filter-seach{
+  width: 40%;
+  display: flex;
+  align-items: center;
+  /* align-self: flex-start; */
+  justify-content: flex-end;
+  column-gap: 5%;
+}
+
+.btn-filter{
+  border: 1px solid #ced4da;
+  background: #F5FCFF;
+  width: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-filter:focus, .btn-filter:active {
+  box-shadow: none !important;
+}
+
+.btn-filter:hover, .btn-filter:active,.btn-filter:focus {
+  border: 1px solid #ced4da;
+  background: #e6ecef;
+  color: var(--gray2);
+}
+
+.div-contend{
+  height: auto;
+  width: 100%;
+  background: var(--white);
+  box-shadow: 0.906205px 1.81241px 13px -2px rgba(0, 0, 0, 0.1);
+  padding-inline: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filters{
+  border-top: 1px solid #ced4da;
+  display: none;
+}
+
+.filters button{
+  width: 200px;
+}
+
+.filters label{
+  font-size: 15px;
+}
+
+.show-filter .btn-filter#btn-filter{
+  padding-bottom: 18px;
+  margin-top: 10px;
+  background: white;
+  position: relative;
+  top: 1px;
+  border-bottom: 1px solid white;
+}
+
+.bg-white{
+  height: 250px;
+}
+
+.list-books{
+  display: flex;
+  justify-content: space-between;
+  column-gap: 22px;
+  flex-wrap: wrap;
+}
+
+.card-book{
+  width: 23%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 1rem 3rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.card-book img{
+  width: 70%;
+  aspect-ratio: 7/11;
+  object-fit: cover;
+}
+
+.card-book h5{
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+.card-book p{
+  text-align: justify;
+  line-height: 152.52%;
+  letter-spacing: 0.035em;
+  font-size: 15px;
+}
+
+.card-book a.ver-mas{
+  align-self: flex-start;
+  font-weight: bold;
+  color: #0185FF;
+  text-decoration: none;
+
+}
+
+
+.show-filter .filters{
+  display: block;
+}
+
+.sub-title{
+  margin-bottom: -16px;
+}
+
+.option-card-book .dropdown-toggle::after {
+  display: none;
+}
+
+.option-card-book{
+  position: absolute;
+  margin-left: 17%;
+}
+
+.dropdown-menu{
+  border-radius: unset;
+}
+
+.justify-content-center{
+  justify-content: center !important;
+}
+
+
+.dropdown-menu a{
+  color: #566474;
+}
+
+
+
+/* formulario css*/
+
+.div-form{
+  display: flex;
+  flex-direction: row;
+  padding: 2rem 10rem;
+  margin-top: 1rem;
+  background: white;
+  column-gap: 4rem;
+  justify-content: space-between;
+}
+
+.div-form-book{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+
+}
+
+.hide-file{
+  height: 0px;
+  opacity: 0;
+}
+
+.btns-lg button{
+  width: 30%;
+}
+
+.option-points{
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  height: 34px;
+  width: 34px;
+  background: transparent;
+}
+
+.imagen-book {
+  width: 350px;
+  aspect-ratio: 7/11;
+  object-fit: cover;
+  border: 1px dashed #617281;
+}

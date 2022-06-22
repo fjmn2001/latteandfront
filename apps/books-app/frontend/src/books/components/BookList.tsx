@@ -1,6 +1,7 @@
 import BookItem from "./BookItem"
 import { Book } from "../types"
 import useGetFetch from "../../shared/hooks/useGetFetch"
+import BookCard from "./BookCard"
 
 interface BooksResponse {
   data: Array<Book>
@@ -14,9 +15,9 @@ const BookList = () => {
   const books = booksResponse ? booksResponse.data : []
 
   return (
-    <div className={"row row-cols-1 row-cols-md-3 g-3"}>
+    <div className={"list-books"}>
       {books.map((book) => (
-        <BookItem key={book.id} {...book} />
+        <BookCard key={book.id} {...book} />
       ))}
     </div>
   )

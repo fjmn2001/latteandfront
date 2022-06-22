@@ -1,7 +1,7 @@
 import useGetFetch from "../../shared/hooks/useGetFetch"
 import Alert from "../../shared/components/ui/Alert"
 
-type CategoriesResponse = Array<{
+export type CategoriesResponse = Array<{
   id: string
   name: string
 }>

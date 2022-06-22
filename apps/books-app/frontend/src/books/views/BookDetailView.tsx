@@ -1,6 +1,7 @@
 import useGetFetch from "../../shared/hooks/useGetFetch"
-import { useParams } from "react-router-dom"
+import { generatePath, Link, useParams } from "react-router-dom"
 import { Book } from "../types"
+import { BOOK_DELETE } from "../config/router/paths"
 
 interface BookResponse extends Book {}
 
@@ -16,7 +17,31 @@ const BookDetailView = () => {
 
   return (
     <>
-      <h1>{book.title}</h1>
+      <h1>
+        {book.title}
+
+        <div className="btn-group ms-3" role="group">
+          <button
+            id="btnGroupDrop1"
+            type="button"
+            className="btn btn-primary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ...
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <li>
+              <Link
+                className={"dropdown-item"}
+                to={generatePath(BOOK_DELETE, { id: book.id })}
+              >
+                Delete
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </h1>
       <hr />
       <div className={"col"}>
         <div className={"card"}>
