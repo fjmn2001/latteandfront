@@ -22,28 +22,20 @@ const BookCard = (book: Props) => {
         <ul className="dropdown-menu" aria-labelledby="cardBook">
           <li>
             <a className="dropdown-item" href="#">
-              Ver
+              More details
             </a>
           </li>
           <li>
             <a className="dropdown-item" href="#">
-              Editar
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Eliminar
+              Delete
             </a>
           </li>
         </ul>
       </div>
-      <h5>YO NEGACIONISTA </h5>
-      <p>
-        Lorem ipsum dolor sitatede do eiusmod amete, consectetur adipiscing
-        elit, sed do eiusmod temporde incididunt mut labore et dolore.
-      </p>
+      <h5>{book.title}</h5>
+      <p>{book.description}</p>
       <a href="" className="ver-mas">
-        Ver libro
+        More details
       </a>
     </div>
   )

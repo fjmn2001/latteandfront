@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Filters from "../components/filters/Filters"
 import { BooksContextProvider } from "../contexts/BooksContext"
+import FiltersTitle from "../components/filters/FiltersTitle"
 
 const BooksView = () => {
   const { state } = useLocation()
@@ -23,9 +24,7 @@ const BooksView = () => {
     <BooksContextProvider>
       {hasSucceeded && <Alert type={"success"}>Book added!</Alert>}
       <Filters />
-      <div className="row ps-1 mt-4">
-        <h4 className=" sub-title">Todos los libros</h4>
-      </div>
+      <FiltersTitle />
       <BookList />
     </BooksContextProvider>
   )
