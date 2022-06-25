@@ -88,25 +88,25 @@ body{
   border-radius: unset;
 }
 
-.seach-group{
+.search-group{
   width: 300px;
   margin: 0;
 }
 
-.seach{
+.search{
   width: 300px;
   border-right: unset;
 }
-.seach:focus ~ .btn-seach{
+.search:focus ~ .btn-search{
   border-color: #86b7fe;
 }
 
-.btn-seach{
+.btn-search{
   border-left: unset;
   border-color: #ced4da;
 }
 
-.btn-seach:hover, .btn-seach:active {
+.btn-search:hover, .btn-search:active {
   background: #f6f6f6;
   border-color: #ced4da;
 }
@@ -115,7 +115,7 @@ body{
   box-shadow: none;
 }
 
-.div-filter-seach{
+.div-filter-search{
   width: 40%;
   display: flex;
   align-items: center;
